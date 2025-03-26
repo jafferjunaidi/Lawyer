@@ -1,0 +1,99 @@
+<?php
+include 'config.php';
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="Description" content="Enter your description here"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<link rel="stylesheet" href="assets/css/style.css">
+<title>Admin Signup</title>
+</head>
+<body>
+    
+    <br><br><br><br><br><br><br><br><br>
+   
+    <!-- Button trigger modal -->
+    <center>
+<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#staticBackdrop" id="#modalbutton">
+  <i><b class="text-light">Admin Signup Modal</b></i>
+  </button>
+  </center>
+
+  <!-----------starting modal-------------->
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content" >
+        <div class="modal-header" >
+          <h1 class="modal-title fs-2" id="staticBackdropLabel"><i>Signup</i></h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          
+          <form method="post" enctype="multipart/form-data">
+               
+                <input type="text" class="form-control mb-2" placeholder="Full name" title="Enter your full name" required name="txtfn">
+              
+                <input type="email" class="form-control mb-2" placeholder="Email address" title="Enter your email"  required name="txte">
+           
+                <input type="password" class="form-control mb-2" placeholder="Password" title="Enter your password"  required name="txtp">
+
+                <input type="password" class="form-control mb-2" placeholder="Repeat password" title="Repeat your password"  required name="txtrp">
+                 
+                <input type="file" name="txtf" required class="form-control mb-3" title="Upload your pic">
+
+                <div class="d-grid gap-2">
+                <input type="submit" name="btnreg" value="Register" class="btn btn-warning text-light fw-bold">
+                </div>
+              
+                <p class="text-center text-muted mt-4 mb-0">Already have an account? <a href="adminlogin.php"
+                    class="fw-bold text-body "><u style="color: orange;">Login here</u></a></p>
+ 
+              </form>
+              
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+    <!-----------closing modal------------->
+
+<?php
+if(isset($_POST['btnreg']))
+{
+  $fn=$_POST['txtfn'];
+  $e=$_POST['txte'];
+  $p=md5($_POST['txtp']);
+  $rp=md5($_POST['txtrp']);
+  
+  $f=$_FILES['txtf']['name'];
+  $tmp=$_FILES['txtf']['tmp_name'];
+  move_uploaded_file($tmp,"./admin_panel/pictures/" .$f);
+  
+  $insert=mysqli_query($con,"insert into adminsignup values('null','$fn','$e','$p','$f')");
+
+if($insert)
+{
+ echo '<div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+<strong><center>Admin account has been created successfully!!</center></strong>
+ <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>';
+
+echo "<meta http-equiv='refresh' content='2; url=adminlogin.php'>";
+
+}
+
+}
+?>
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+
