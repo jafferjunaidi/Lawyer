@@ -56,7 +56,7 @@ Lawyer website bring expertise and dedication to every case we handle. Experienc
 **Database:** MySQL
 <br><br>
 
-## Deployment
+## Deployment & Installation
 
 To run this project simply download and put it in XAMPP htdocs folder open XAMPP control panel start Apache and MySQL services now open any of your favourite browser and type this link in your url bar http://localhost/phpmyadmin/ MySQL database will be open simply import lawyer.sql file from your project which is present in htdocs folder after import open this link in your browser http://localhost/Lawyer/ project will be run.
 <br><br>
